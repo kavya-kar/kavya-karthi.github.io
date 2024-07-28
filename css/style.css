@@ -1,0 +1,43 @@
+#filter-container {
+    margin-bottom: 20px;
+}
+
+#continent-filter {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.continent-item {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+#visualization-container {
+    display: flex;
+    margin-top: 20px;
+}
+
+#chart-container {
+    flex: 3;
+}
+
+#country-select-container {
+    flex: 1;
+    overflow-y: auto;
+    padding-left: 20px;
+    height: 500px; /* Match the height of the chart */
+}
+
+.country-checkbox {
+    display: block;
+    margin-bottom: 5px;
+}

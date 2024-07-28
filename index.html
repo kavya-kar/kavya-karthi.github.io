@@ -3,38 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' href='css/style.css'>
     <title>Global Education Data Visualization</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         body { font-family: 'Times New Roman', Times, serif, sans-serif; text-align: center; }
         h1 { color: #333; }
         #welcome { margin-bottom: 30px; }
-        #visualization { width: 800px; height: 500px; margin: 0 auto; }
+        #visualization { width: 1000px; height: 600px; margin: 0 auto; }
         .navigation { margin-top: 20px; }
         button { padding: 10px 20px; margin: 0 10px; }
         .hidden { display: none; }
     </style>
     <script type="text/javascript" src='js/worldLiteracy.js' charset='utf-8'></script>
     <script type="text/javascript" src='js/countryComparison.js' charset='utf-8'></script>
+    <script type="text/javascript" src="js/gdpVsLiteracy.js" charset='utf-8'></script>
     <script type="text/javascript" src='js/main.js' charset='utf-8'></script>
-</head>
 
-
-<body>
     <div id="welcome">
         <h1>Welcome to Global Education Data Visualization</h1>
         <p>Explore interactive visualizations about global education trends.</p>
     </div>
+</head>
 
+<body>   
     <br>
     <div id='buttonsDivId'>
-        <button id="prevBtn" type="button" style="visibility : hidden" onclick="previousScene()">&laquo; Previous</button>
+        <button id="prevBtn" type="button" style="visibility: hidden" onclick="previousScene()">&laquo; Previous</button>
         <button id="bs" type="button" onclick="initializeVisualization()">Explore Literacy Rates</button>
-        <button id="nextBtn" type="button" style="visibility : hidden" onclick="nextScene(0)">Next&raquo;</button>
+        <button id="nextBtn" type="button" style="visibility: hidden" onclick="initializeVisualization()">Next &raquo;</button>
     </div>
     <div id='text'></div>
-    <div id="chart"></div>
+    <div id="visualization-container" style="display: flex; margin-top: 20px;">
+        <div id="chart-container" style="flex: 3;">
+            <div id="visualization"></div>
+        </div>
+        <div id="country-select-container" style="flex: 1; overflow-y: auto; visibility: hidden;">
+            <div id="country-checkboxes"></div>
+        </div>
+    </div>
+    <!-- <div id="visualization" style="margin: auto;"></div> -->
     <br>
-   
 </body>
 </html>
