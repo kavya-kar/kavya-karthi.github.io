@@ -1,4 +1,6 @@
 async function createCountryComparisonChart() {
+    d3.select("#visualization").select("svg").remove();
+    
     const literacyData = await d3.csv("../data/cross-country-literacy-rates.csv");
 
     const nestedData = d3.group(literacyData, d => d.Code);
@@ -127,13 +129,6 @@ async function createCountryComparisonChart() {
     checkboxContainer.selectAll("input")
         .on("change", updateGraph);
 
-    // svg.append("text")
-    //     .attr("x", width / 2)
-    //     .attr("y", -margin.top / 2)
-    //     .attr("text-anchor", "middle")
-    //     .style("font-size", "16px")
-    //     .style("font-weight", "bold")
-    //     .text("Literacy Rates by Country Over Time");
 
     svg.append("text")
         .attr("transform", `translate(${width/2}, ${height + margin.bottom - 10})`)

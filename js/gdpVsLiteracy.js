@@ -1,4 +1,6 @@
 function createGdpVsLiteracyChart() {
+    const container = d3.select("#visualization");
+
     Promise.all([
         d3.csv('../data/cross-country-literacy-rates.csv'),
         d3.csv('../data/dictionary.csv')
@@ -19,7 +21,7 @@ function createGdpVsLiteracyChart() {
         const width = 800 - margin.left - margin.right;
         const height = 500 - margin.top - margin.bottom;
 
-        const svg = d3.select("#visualization")
+        const svg = container
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -53,7 +55,7 @@ function createGdpVsLiteracyChart() {
 
         const dotsGroup = svg.append("g").attr("class", "dots");
 
-        const tooltip = d3.select("#visualization")
+        const tooltip = container
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
@@ -107,7 +109,7 @@ function createGdpVsLiteracyChart() {
                 });
         }
 
-        const gdpSlider = d3.select("#visualization")
+        const gdpSlider = container
             .append("input")
             .attr("type", "range")
             .attr("min", 0)
@@ -116,7 +118,7 @@ function createGdpVsLiteracyChart() {
             .attr("value", d3.max(mergedData, d => d.gdp))
             .style("width", "100%");
 
-        const sliderLabel = d3.select("#visualization")
+        const sliderLabel = container
             .append("div")
             .text(`GDP Threshold: ${d3.max(mergedData, d => d.gdp)}`);
 

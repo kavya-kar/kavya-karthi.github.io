@@ -1,10 +1,9 @@
 function createWorldLiteracyChart() {
-
+    d3.select("#visualization").select("svg").remove();
+    
     const margin = {top: 20, right: 100, bottom: 50, left: 100},
         width = 1000 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;  
-
-    // d3.select("#visualization svg").remove();
 
     const svg = d3.select("#visualization")
         .append("svg")
@@ -22,13 +21,6 @@ function createWorldLiteracyChart() {
             }))
             .sort((a, b) => a.year - b.year);
 
-
-        worldData.forEach(d => {
-            if (isNaN(d.year) || isNaN(d.literacy)) {
-                console.error("Invalid data point:", d);
-            }
-        });
-
         const x = d3.scaleLog()
             .base(20)
             .domain(d3.extent(worldData, d => d.year))
@@ -44,17 +36,17 @@ function createWorldLiteracyChart() {
             .call(d3.axisLeft(y));
 
         svg.append("text")
-        .attr("text-anchor", "middle")
-        .attr("x", width / 2)
-        .attr("y", height + margin.bottom - 10)
-        .text("Year");
+            .attr("text-anchor", "middle")
+            .attr("x", width / 2)
+            .attr("y", height + margin.bottom - 10)
+            .text("Year");
 
         svg.append("text")
-        .attr("text-anchor", "middle")
-        .attr("transform", "rotate(-90)")
-        .attr("y", -margin.left + 12)
-        .attr("x", -height / 2)
-        .text("Literacy Rate (%)");
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -margin.left + 12)
+            .attr("x", -height / 2)
+            .text("Literacy Rate (%)");
 
         svg.append("path")
             .datum(worldData)
@@ -65,6 +57,34 @@ function createWorldLiteracyChart() {
                 .x(d => x(d.year))
                 .y(d => y(d.literacy))
             );
+
+        // Add annotations
+        const annotations = [
+            { year: 1860, text: "End of the Industrial Revolution" },
+            { year: 1950, text: "Rise of accessible education for the middle class" }
+        ];
+
+        annotations.forEach(annotation => {
+            // Add vertical line
+            svg.append("line")
+                .attr("x1", x(annotation.year))
+                .attr("x2", x(annotation.year))
+                .attr("y1", 0)
+                .attr("y2", height)
+                .attr("stroke", "gray")
+                .attr("stroke-width", 1)
+                .attr("opacity", 0.5);
+        
+            // Add text
+            svg.append("text")
+                .attr("x", x(annotation.year))
+                .attr("y", height - 200)  // Adjust this value to move text downward
+                .attr("text-anchor", "start")
+                .attr("transform", `rotate(-90, ${x(annotation.year)}, ${height - 200})`)  // Adjust this value too
+                .text(annotation.text)
+                .attr("fill", "gray")
+                .attr("font-size", "12px");
+        });
 
         const verticalLine = svg.append("line")
             .attr("class", "vertical-line")
