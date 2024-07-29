@@ -17,14 +17,26 @@ function initializeVisualization() {
 
 function showSlide(index) {
     cleanupCurrentSlide();
-
+    
     document.getElementById("country-select-container").style.visibility = 
         (index === 1) ? 'visible' : 'hidden';
-        
     document.getElementById('text').innerHTML = `<h2>${slides[index].title}</h2>`;
     slides[index].create();
     
     updateButtonStates();
+    console.log("showSlide end: " + index)
+}
+
+function showSlide2(index) {
+    cleanupCurrentSlide();
+    
+    document.getElementById("country-select-container").style.visibility = 
+        (index === 1) ? 'visible' : 'hidden';
+    document.getElementById('text').innerHTML = `<h2>${slides[index].title}</h2>`;
+    slides[index].create();
+    
+    updateButtonStates();
+    currentSlide = index;
     console.log("showSlide end: " + index)
 }
 
@@ -42,7 +54,6 @@ function cleanupCurrentSlide() {
     d3.select("#visualization").selectAll("input").remove();
     d3.select("#visualization").selectAll("div.tooltip").remove();
     d3.select("#visualization").selectAll("div").remove();
-    
     // Clear any intervals or timeouts
     // (add this if you have any animations or timeouts in your visualizations)
     clearInterval(window.currentInterval);
@@ -51,8 +62,15 @@ function cleanupCurrentSlide() {
 
 function previousScene() {
     if (currentSlide > 0) {
-        currentSlide -= 1
-        showSlide(currentSlide);
+    
+    //     document.getElementById("country-select-container").style.visibility = 
+    //         (currentSlide - 1 === 1) ? 'visible' : 'hidden';
+    //     document.getElementById('text').innerHTML = `<h2>${slides[currentSlide - 1].title}</h2>`;
+    //     slides[currentSlide - 1].create();
+    
+    //     updateButtonStates();
+        
+        showSlide2(currentSlide - 1);
     }
 }
 
