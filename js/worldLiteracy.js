@@ -1,6 +1,6 @@
 function createWorldLiteracyChart() {
     d3.select("#visualization").select("svg").remove();
-    
+
     const margin = {top: 20, right: 100, bottom: 50, left: 100},
         width = 1000 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;  
@@ -12,7 +12,7 @@ function createWorldLiteracyChart() {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    d3.csv("../data/cross-country-literacy-rates.csv").then(function(data) {
+    d3.csv("./data/cross-country-literacy-rates.csv").then(function(data) {
         const worldData = data
             .filter(d => d.Code === "OWID_WRL")
             .map(d => ({

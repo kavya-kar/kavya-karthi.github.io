@@ -2,8 +2,8 @@ function createGdpVsLiteracyChart() {
     const container = d3.select("#visualization");
 
     Promise.all([
-        d3.csv('../data/cross-country-literacy-rates.csv'),
-        d3.csv('../data/dictionary.csv')
+        d3.csv('./data/cross-country-literacy-rates.csv'),
+        d3.csv('./data/dictionary.csv')
     ]).then(([literacyData, gdpData]) => {
         const literacy2022 = literacyData.filter(d => d.Year === '2022');
 
